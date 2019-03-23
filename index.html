@@ -202,6 +202,20 @@
 							<!-- <span class="badge badge-info badge-pill float-right">2</span> -->
 						</a>
 					</li>
+					<li class="menu_sub">
+						<a href="addcontogroup.html">
+							<i class="fa fa-plus"></i>
+							<span>Create New Convict</span>
+							<!-- <span class="badge badge-info badge-pill float-right">2</span> -->
+						</a>
+					</li>
+					<li class="menu_sub">
+						<a href="createmoderators.html">
+							<i class="fa fa-plus"></i>
+							<span>Create Moderators</span>
+							<!-- <span class="badge badge-info badge-pill float-right">2</span> -->
+						</a>
+					</li>
 					<!-- <li class="menu_title">Components</li> -->
 
 				</ul>
@@ -217,13 +231,13 @@
 											<div class="col-5">
 												<div class="home_counter rounded-circle text-center wb-icon-box">
 													<div class="ep_22" data-percent="75">
-														<span>3</span>
+														<span class="groups"></span>
 													</div>
 												</div>
 											</div>
 											<div class="col-7">
-												<span class="counter">3</span>
-												<h6 class="mt-2 mb-0 color_gray">Total Groups</h6>
+												<span class="counter groups"></span>
+												<h6 class="mt-2 mb-0 color_gray"><a href="">Total Groups</a></h6>
 											</div>
 										</div>
 									</div>
@@ -239,8 +253,8 @@
 												</div>
 											</div>
 											<div class="col-7">
-												<span class="counter">58</span>
-												<h6 class="mt-2 mb-0 color_gray">Total Members</h6>
+												<span class="counter conv"></span>
+												<h6 class="mt-2 mb-0 color_gray"><a href="reports.html">Total Convicts</a></h6>
 											</div>
 										</div>
 									</div>
@@ -255,8 +269,8 @@
 												</span>
 											</div>
 											<div class="col-7">
-												<span class="counter">3</span>
-												<h6 class="mt-2 mb-0 color_gray">Sessions This Week</h6>
+												<span class="counter district">3</span>
+												<h6 class="mt-2 mb-0 color_gray"><a href="#">Districts</a></h6>
 											</div>
 										</div>
 									</div>
@@ -274,8 +288,8 @@
 												</div>
 											</div>
 											<div class="col-7">
-												<span class="counter">34</span>
-												<h6 class="mt-2 mb-0 color_gray">Total </h6>
+												<span class="counter moderate"></span>
+												<h6 class="mt-2 mb-0 color_gray"><a href="#">Moderators </a></h6>
 											</div>
 										</div>
 									</div>
@@ -317,7 +331,40 @@
 	<script type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
 	<script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
 	<script src="assets/js/custom.js" type="text/javascript"></script>
-	<script></script>
+	<script>
+		let localStore = JSON.parse(window.localStorage.getItem('localStore'));
+		// console.log(JSON.parse(localStore));
+		let district = localStore.superLogInDist;
+
+		$.get(`http://192.168.10.102:3000/groups/${district}`, function (e) {
+			let totalGroups = e.length;
+			$('.groups').text(totalGroups);
+			//for (district of e) {
+			//	$('.group').append(`<option value="${district._id}">${district.name}</option>`);
+
+		});
+
+		$.get(`http://192.168.10.102:3000/districts`, function (e) {
+			let totalDist = e.length;
+			$('.district').text(totalDist);
+			//for (district of e) {
+			//	$('.group').append(`<option value="${district._id}">${district.name}</option>`);
+
+		});
+
+		$.get(`http://192.168.10.102:3000/moderators`, function (e) {
+			let totalMod = e.length;
+			$('.moderate').text(totalMod);
+			//for (district of e) {
+			//	$('.group').append(`<option value="${district._id}">${district.name}</option>`);
+
+		});
+
+		$.get(`http://192.168.10.102:3000/convicts`, function (e) {
+			let totalConv = e.length;
+			$('.conv').text(totalConv);
+		});
+	</script>
 </body>
 
 
