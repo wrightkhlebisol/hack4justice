@@ -282,7 +282,7 @@
                                             <div class="form-group">
                                                 <label for="sessions">Sessions</label>
 
-                                                <input type="number" max="10" min="1" name="" id="input" class="form-control"
+                                                <input type="number" max="10" min="1" name="" id="input" class="form-control sessions"
                                                     required="required" pattern="" title="">
                                             </div>
 
@@ -375,18 +375,21 @@
 
         if (convId.length > 0) {
             $.get(`http://192.168.10.102:3000/convicts/${convId}`, function (e) {
-                console.log(e);
-                for (i in e) {
-                    console.log(i)
-                }
+                // console.log(e);
                 // for (district of e) {
                 // $('.group').append(`<option value="${district._id}">${district.name}<///////option>`);
 
 
 
                 // }
-                $('.comment').val(e.comment);
-                console.log("E", e.comment);
+                $('.dob').val(e.dob);
+                $('.sessions').val(e.sessions);
+                $('.bio').val(e.bio);
+                $('.occupation').val(e.occupation);
+                $('.location').val(e.location);
+                $('.mobile').val(e.mobileNo)
+
+                // console.log("E", e.comment);
             });
 
         }
@@ -398,12 +401,12 @@
             }
         });*/
 
-        $.get(`http://192.168.10.102:3000/groups/${district}`, function (e) {
-            console.log(e);
-            for (district of e) {
-                $('.group').append(`<option value="${district._id}">${district.name}</option>`);
-            }
-        });
+        // $.get(`http://192.168.10.102:3000/groups/${district}`, function (e) {
+        //     console.log(e);
+        //     for (district of e) {
+        //         $('.group').append(`<option value="${district._id}">${district.name}</option>`);
+        //     }
+        // });
 
         $('.submit').click(function (e) {
             e.preventDefault();
