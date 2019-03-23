@@ -289,124 +289,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>John Doe</td>
-                                                    <td>3</td>
-                                                    <td style="padding-top: 17px;">
-                                                        <div class="progress">
-                                                            <div class="progress-bar bg-danger" role="progressbar"
-                                                                style="width: 35%" aria-valuenow="15" aria-valuemin="0"
-                                                                aria-valuemax="100"></div>
-                                                            <div class="progress-bar bg-primary" role="progressbar"
-                                                                style="width: 30%" aria-valuenow="30" aria-valuemin="0"
-                                                                aria-valuemax="100"></div>
-                                                            <div class="progress-bar bg-warning" role="progressbar"
-                                                                style="width: 20%" aria-valuenow="20" aria-valuemin="0"
-                                                                aria-valuemax="100"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn  btn-primary btn-sm"
-                                                            data-toggle="modal" data-target=".comment">Comment</button>
 
-                                                        <button type="button" class="btn  btn-primary btn-sm"
-                                                            data-toggle="modal" data-target=".report">File
-                                                            Report</button>
-
-                                                        <div class="modal fade bd-example-modal-lg comment" tabindex="-1"
-                                                            role="dialog" aria-labelledby="myLargeModalLabel"
-                                                            aria-hidden="true">
-                                                            <div class="modal-dialog modal-lg">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="myLargeModalLabel">Comment
-                                                                            on John
-                                                                            Doe's Progress</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="panel profile-cover">
-                                                                            <div class="form-group">
-                                                                                <label for="exampleFormControlTextarea1">Enter
-                                                                                    Comment (Be Positive)</label>
-                                                                                <textarea class="form-control" id="2323pdsdcds"
-                                                                                
-                                                                                    rows="3"></textarea>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">
-                                                                            Close
-                                                                        </button>
-                                                                        <button type="submit" data-convictId="2323pdsdcds"      class="submitComment btn btn-primary">
-                                                                            Save changes
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="modal fade bd-example-modal-lg report" tabindex="-1"
-                                                            role="dialog" aria-labelledby="myLargeModalLabel"
-                                                            aria-hidden="true">
-                                                            <div class="modal-dialog modal-lg">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="myLargeModalLabel">Report
-                                                                            on John
-                                                                            Doe's Progress</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="form-group">
-                                                                            <label for="books">Contents Accessed</label>
-                                                                            <input type="number" name="" id="input"
-                                                                                class="form-control" value="" min="0"
-                                                                                max="10" step="1" required="required"
-                                                                                title="">
-                                                                        </div>
-
-                                                                        <div class="form-group">
-                                                                            <label for="books">Sessions Attended</label>
-                                                                            <input type="number" name="" id="input"
-                                                                                class="form-control" value="" min="0"
-                                                                                max="10" step="1" required="required"
-                                                                                title="">
-                                                                        </div>
-
-                                                                        <div class="form-group">
-                                                                            <label for="books">Days Without
-                                                                                Incident</label>
-                                                                            <input type="number" name="" id="input"
-                                                                                class="form-control" value="" min="0"
-                                                                                max="10" step="1" required="required"
-                                                                                title="">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">
-                                                                            Close
-                                                                        </button>
-                                                                        <button type="button" class="btn btn-primary">
-                                                                            Save changes
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                           
                                             </tbody>
                                         </table>
                                     </div>
@@ -451,22 +334,23 @@
     <script>
         let prevResponse = JSON.parse(localStorage.getItem("localStore"));
         // console.log(prevResponse._id);
-        
+
         $.ajax({
-                type: "GET",
-                url: 'http://192.168.10.102:3000/groups/convicts/' + prevResponse.group._id,
-                // data: JSON.stringify(data),
-                success: (e) => {
-                    // console.log(e);
-                    // convicts.push(e);
-                    let convicts = [...e]
-                    console.log(convicts);
-                    // localStore = JSON.stringify(e);
-                    // window.localStorage.setItem('localStore', localStore);
-                    // window.location.href = 'moderator-dash.html'
-                    convicts.forEach((convict,i) => {
-                // console.log(convict)
-                    $(".table tbody").append(` <tr>
+            type: "GET",
+            url: 'http://192.168.10.102:3000/groups/convicts/' + prevResponse.group._id,
+            // data: JSON.stringify(data),
+            success: (e) => {
+                // console.log(e);
+                // convicts.push(e);
+                let convicts = [...e]
+                console.log(convicts);
+                // localStore = JSON.stringify(e);
+                // window.localStorage.setItem('localStore', localStore);
+                // window.location.href = 'moderator-dash.html'
+                convicts.forEach((convict, i) => {
+                    // console.log(convict)
+                    $(".table tbody").append(
+                        ` <tr>
                                                     <th scope="row">${i+1}</th>
                                                     <td>${convict.name}</td>
                                                     <td>${Math.floor(Math.random() * 10)}</td>
@@ -484,12 +368,10 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <button type="button" class="btn  btn-primary btn-sm"
-                                                            data-toggle="modal" data-target=".comment">Comment</button>
+                                                        <a href="mod-comment.html?id=${convict._id}" type="button" class="btn  btn-primary btn-sm">Comment</a>
 
-                                                        <button type="button" class="btn  btn-primary btn-sm"
-                                                            data-toggle="modal" data-target=".report">File
-                                                            Report</button>
+                                                        <a href="mod-comment.html?id=${convict._id}" type="button" class="btn  btn-primary btn-sm">File
+                                                            Report</a>
 
                                                         <div class="modal fade bd-example-modal-lg comment" tabindex="-1"
                                                             role="dialog" aria-labelledby="myLargeModalLabel"
@@ -582,21 +464,24 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                </tr>`)
+                                                </tr>`
+                    )
 
-                                                
-                            $(`.${convict._id}`).click(function (e) {
+
+                    $(`.${convict._id}`).click(function (e) {
                         e.preventDefault();
 
                         // let convictId = $(e.currentTarget).attr('data-convictId');
-                        let comment = $('#'+convict._id).val()
+                        let comment = $('#' + convict._id).val()
 
                         // console.log(data);
-                        let data = {comment};
+                        let data = {
+                            comment
+                        };
                         console.log(data);
                         $.ajax({
                             type: "PUT",
-                            url: 'http://192.168.10.102:3000/convicts/'+ convictId,
+                            url: 'http://192.168.10.102:3000/convicts/' + convictId,
                             data: JSON.stringify(data),
                             success: (res) => {
                                 window.location.href = '/moderator-dash.html'
@@ -606,13 +491,13 @@
                         });
 
                         /* $.post('http://192.168.10.102:3000/superintendents/register', data); */
+                    });
                 });
-            });
 
 
-                },
-                contentType: 'application/json',
-                dataType: 'json'
+            },
+            contentType: 'application/json',
+            dataType: 'json'
         });
 
 
@@ -638,13 +523,10 @@
 
         //         /* $.post('http://192.168.10.102:3000/superintendents/register', data); */
         // });
-        
-        function submitCommen(e){
-            console.log("E",e.target)
+
+        function submitCommen(e) {
+            console.log("E", e.target)
         }
-            
-        
-            
     </script>
 </body>
 
