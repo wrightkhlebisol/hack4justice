@@ -320,7 +320,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
+                                                <!-- <tr>
                                                     <th scope="row">1</th>
                                                     <td>John Doe</td>
                                                     <td>3</td>
@@ -497,7 +497,7 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                </tr>
+                                                </tr> -->
                                             </tbody>
                                         </table>
                                     </div>
@@ -543,7 +543,263 @@
     <script type="text/javascript" src="assets/js/echarts/init-echarts.js"></script>
     <script type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="assets/js/custom.js" type="text/javascript"></script>
-    <script></script>
+    <script>
+    
+    
+    let prevResponse = JSON.parse(localStorage.getItem("localStore"));
+        // console.log(prevResponse._id);
+
+        $.ajax({
+            type: "GET",
+            url: 'http://192.168.10.102:3000/groups/' + prevResponse.superLogInDist,
+            // data: JSON.stringify(data),
+            success: (e) => {
+                console.log(e);
+                // convicts.push(e);
+                let groups = [...e]
+                console.log(groups);
+                // localStore = JSON.stringify(e);
+                // window.localStorage.setItem('localStore', localStore);
+                // window.location.href = 'moderator-dash.html'
+                let a = [];
+                groups.forEach((group,i)=>{
+                    $.ajax({
+                        type: "GET",
+                        url: 'http://192.168.10.102:3000/groups/convicts/' + group._id,
+                        // data: JSON.stringify(data),
+                        success: (e) => {
+                            console.log("Convicts",e);
+                            a = [...e];
+                            e.forEach((convict, i) => {                            
+                                 $(".table tbody").append(
+                                                ` <tr>
+                                                                            <th scope="row">${i+1}</th>
+                                                                            <td>${convict.name}</td>
+                                                                            <td>${Math.floor(Math.random() * 10)}</td>
+                                                                            <td style="padding-top: 17px;">
+                                                                                <div class="progress">
+                                                                                    <div class="progress-bar bg-danger" role="progressbar"
+                                                                                        style="width: 35%" aria-valuenow="15" aria-valuemin="0"
+                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-primary" role="progressbar"
+                                                                                        style="width: 30%" aria-valuenow="30" aria-valuemin="0"
+                                                                                        aria-valuemax="100"></div>
+                                                                                    <div class="progress-bar bg-warning" role="progressbar"
+                                                                                        style="width: 20%" aria-valuenow="20" aria-valuemin="0"
+                                                                                        aria-valuemax="100"></div>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                        <button type="button" class="btn  btn-primary btn-sm "
+                                                            data-toggle="modal"  data-target=".bd-example-modal-lg${convict._id}"><i
+                                                                class="icon-eye"></i></button>
+
+                                                        <div  class="modal fade bd-example-modal-lg${convict._id}" tabindex="-1" role="dialog"
+                                                            aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-lg">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="myLargeModalLabel">John
+                                                                            Doe's Progress Report</h5>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="panel profile-cover">
+                                                                            <div class="profile-cover__img">
+                                                                                <img src="assets/images/01_150x150.png"
+                                                                                    alt="">
+                                                                                <h3 class="h3">${convict.name}</h3>
+                                                                            </div>
+                                                                            <div class="profile-cover__action bg--img"
+                                                                                data-overlay="0.3">
+                                                                                <button class="btn btn-rounded btn-info">
+                                                                                    <i class="fa fa-plus"></i>
+                                                                                    <span>Follow</span>
+                                                                                </button>
+                                                                                <button class="btn btn-rounded btn-info">
+                                                                                    <i class="fa fa-comment"></i>
+                                                                                    <span>Message</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="profile-cover__info">
+                                                                                <ul class="nav">
+                                                                                    <li>
+                                                                                        <strong>${convict.sessions}/30</strong>Sessions
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <strong>33/40</strong>Books
+                                                                                        Read
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <strong>136</strong>Days
+                                                                                        Without Incident
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="panel row ">
+                                                                            <div class="col-sm-6">
+                                                                                <div class="panel-heading">
+                                                                                    <h3 class="panel-title">About Me</h3>
+                                                                                </div>
+                                                                                <div class="panel-content panel-about">
+                                                                                    <p>
+                                                                                       ${convict.bio}
+                                                                                    </p>
+                                                                                    <table>
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <th><i class="fa fa-briefcase"></i>Occupation</th>
+                                                                                                <td>UI/UX Designer</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <th><i class="fa fa-birthday-cake"></i>Date
+                                                                                                    of Birth</th>
+                                                                                                <td>13 June 1983</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <th><i class="fa fa-map-marker"></i>Locatoin</th>
+                                                                                                <td>123 Lorem Steet,
+                                                                                                    NY,
+                                                                                                    United States.</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <th><i class="fa fa-mobile-phone"></i>Mobile
+                                                                                                    No.</th>
+                                                                                                <td><a href="#" class="btn-link">732-839-7510</a></td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <th><i class="fa fa-globe"></i>Website</th>
+                                                                                                <td><a href="#" class="btn-link">example.com</a></td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                                <div class="panel-social">
+                                                                                    <ul class="nav">
+                                                                                        <li>
+                                                                                            <a href="#"> <i class="fa fa-facebook"></i>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a href="#"> <i class="fa fa-twitter"></i>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a href="#"> <i class="fa fa-google-plus"></i>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a href="#"> <i class="fa fa-instagram"></i>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a href="#"> <i class="fa fa-behance"></i>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a href="#"> <i class="fa fa-dribbble"></i>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-sm-6">
+                                                                                <div class="card card-shadow mb-4">
+                                                                                    <div class="card-header">
+                                                                                        <div class="card-title">
+                                                                                            Basic Area
+                                                                                        </div>
+                                                                                        <div class="tools">
+                                                                                            <a class="fa fa-repeat btn-color box-refresh"
+                                                                                                href="javascript:;"></a>
+                                                                                            <a class="t-collapse btn-color fa fa-chevron-down"
+                                                                                                href="javascript:;"></a>
+                                                                                            <a class="t-close btn-color fa fa-times"
+                                                                                                href="javascript:;"></a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card-body">
+                                                                                        <div id="b-area" style="height: 350px"></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-dismiss="modal">
+                                                                            Close
+                                                                        </button>
+                                                                        <button type="button" class="btn btn-primary">
+                                                                            Save changes
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                
+                                                                        </tr>`
+                                            )})
+
+
+
+                        },
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        async: false
+                    })
+                });
+
+
+
+                //     $(`.${convict._id}`).click(function (e) {
+                //         e.preventDefault();
+
+                //         // let convictId = $(e.currentTarget).attr('data-convictId');
+                //         let comment = $('#' + convict._id).val()
+
+                //         // console.log(data);
+                //         let data = {
+                //             comment
+                //         };
+                //         console.log(data);
+                //         $.ajax({
+                //             type: "PUT",
+                //             url: 'http://192.168.10.102:3000/convicts/' + convictId,
+                //             data: JSON.stringify(data),
+                //             success: (res) => {
+                //                 window.location.href = '/moderator-dash.html'
+                //             },
+                //             contentType: 'application/json',
+                //             dataType: 'json'
+                //         });
+
+                //         /* $.post('http://192.168.10.102:3000/superintendents/register', data); */
+                //     });
+                // });
+
+
+            },
+            contentType: 'application/json',
+            dataType: 'json'
+        });
+
+        function ShowModal(id)
+        {
+            let modal = document.getElementById(id);
+            modal.className += "show";
+            modal.style.display = "block";
+        }
+
+    
+    
+    
+    </script>
 </body>
 
 </html>
