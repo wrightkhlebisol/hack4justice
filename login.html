@@ -53,6 +53,9 @@
     <script type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="assets/js/custom.js" type="text/javascript"></script>
     <script>
+        let host = 'http://192.168.10.102:3000';
+    </script>
+    <script>
         $('.submit').click(function (e) {
             e.preventDefault();
             var email = $('.email').val();
@@ -63,7 +66,7 @@
 
             $.ajax({
                 type: "POST",
-                url: 'http://192.168.10.102:3000/superintendents/login',
+                url: `${host}/superintendents/login`,
                 data: JSON.stringify(data),
                 success: (e) => {
                     console.log(e);
@@ -78,7 +81,7 @@
                 dataType: 'json'
             });
 
-            /* $.post('http://192.168.10.102:3000/superintendents/register', data); */
+            /* $.post(`${host}/superintendents/register`, data); */
         })
     </script>
 

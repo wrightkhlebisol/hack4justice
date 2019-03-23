@@ -332,11 +332,14 @@
     <script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
     <script src="assets/js/custom.js" type="text/javascript"></script>
     <script>
+        let host = 'http://192.168.10.102:3000';
+    </script>
+    <script>
         let localStore = JSON.parse(window.localStorage.getItem('localStore'));
         // console.log(JSON.parse(localStore));
         let district = localStore.superLogInDist;
 
-        $.get(`http://192.168.10.102:3000/groups/${district}`, function (e) {
+        $.get(`${host}/groups/${district}`, function (e) {
             // console.log(e);
             for (district of e) {
                 $('.group').append(`<option value="${district._id}">${district.name}</option>`);
@@ -363,7 +366,7 @@
 
             $.ajax({
                 type: "POST",
-                url: 'http://192.168.10.102:3000/moderators',
+                url: `${host}/moderators`,
                 data: JSON.stringify(data),
                 success: (e) => {
                     console.log(e);
@@ -372,7 +375,7 @@
                 dataType: 'json'
             });
 
-            /* $.post('http://192.168.10.102:3000/superintendents/register', data); */
+            /* $.post('${host}/superintendents/register', data); */
         })
     </script>
 </body>

@@ -25,6 +25,9 @@
 	<link href="assets/css/menu.css" rel="stylesheet">
 	<link href="assets/css/index.css" rel="stylesheet">
 	<link href="assets/css/responsive.css" rel="stylesheet">
+	<script>
+		let host = 'http://192.168.10.102:3000';
+	</script>
 </head>
 
 <body>
@@ -332,11 +335,14 @@
 	<script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
 	<script src="assets/js/custom.js" type="text/javascript"></script>
 	<script>
+		let host = 'http://192.168.10.102:3000';
+	</script>
+	<script>
 		let localStore = JSON.parse(window.localStorage.getItem('localStore'));
 		// console.log(JSON.parse(localStore));
 		let district = localStore.superLogInDist;
 
-		$.get(`http://192.168.10.102:3000/groups/${district}`, function (e) {
+		$.get(`${host}/groups/${district}`, function (e) {
 			let totalGroups = e.length;
 			$('.groups').text(totalGroups);
 			//for (district of e) {
@@ -344,7 +350,7 @@
 
 		});
 
-		$.get(`http://192.168.10.102:3000/districts`, function (e) {
+		$.get(`${host}/districts`, function (e) {
 			let totalDist = e.length;
 			$('.district').text(totalDist);
 			//for (district of e) {
@@ -352,7 +358,7 @@
 
 		});
 
-		$.get(`http://192.168.10.102:3000/moderators`, function (e) {
+		$.get(`${host}/moderators`, function (e) {
 			let totalMod = e.length;
 			$('.moderate').text(totalMod);
 			//for (district of e) {
@@ -360,7 +366,7 @@
 
 		});
 
-		$.get(`http://192.168.10.102:3000/convicts`, function (e) {
+		$.get(`${host}/convicts`, function (e) {
 			let totalConv = e.length;
 			$('.conv').text(totalConv);
 		});
